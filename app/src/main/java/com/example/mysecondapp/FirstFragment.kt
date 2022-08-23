@@ -1,20 +1,23 @@
 package com.example.mysecondapp
 
+import android.app.Fragment
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.mysecondapp.databinding.FragmentFirstBinding
+import com.example.MySecondApp.R
+import com.example.MySecondApp.databinding.FragmentFirstBinding as FragmentFirstBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
-
-    private var _binding: FragmentFirstBinding? = null
+class FirstFragment(private var _binding: FragmentFirstBinding1? = null) : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,23 +26,42 @@ class FirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentFirstBinding1.inflate(inflater, container, false)
         return binding.root
 
-
-    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toastButton.setOnClickListener {
+        binding.randomButton.setOnClickListener { view.findViewById<Button>(R.id.random_button).setOnClickListener {
+
+                view.findViewById<Button>(R.id.toast_button).setOnClickListener {
+                    view.findViewById<Button>(R.id.count_button).setOnClickListener {
+                        countMe(view)
+                    }
+                    // create a Toast with some text, to appear for a short time
+                    val myToast = Toast.makeText(context, "Hello Toast!", Toast.LENGTH_SHORT)
+                    // show the Toast
+                    myToast.show()
+                }
+            }
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 
+    private fun countMe(view: View) {
+
+        val showCountTextView = view.findViewById<TextView>(R.id.textview_first)
+        val countString = showCountTextView.text.toString()
+        var count = countString.toInt()
+        count++
+        showCountTextView.text = count.toString()
+    }
+
+    @Deprecated("Deprecated in Java")
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
