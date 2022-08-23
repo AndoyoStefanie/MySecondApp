@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.MySecondApp.R
 import com.example.MySecondApp.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -60,10 +59,5 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
-
-    private fun findNavController(navHostFragmentContentMain: Int): Any {
-    }
 }
-private fun Any.navigateUp(appBarConfiguration: AppBarConfiguration): Boolean {
 
-}
